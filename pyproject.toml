@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling==1.32.4"]
+build-backend = "hatchling.build"
+[project]
+name = "agent-workbench"
+version = "0.1.0"
+license = "MIT"
+description = "A bounded agent runtime with scoped tools, explicit approvals and private event traces."
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.12,<3", "typer>=0.20,<1", "httpx>=0.28,<1"]
+[project.scripts]
+agent-workbench = "agent_workbench.cli:app"
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "pytest-asyncio>=1,<2", "pytest-cov>=6,<8", "ruff>=0.14,<1", "mypy>=1.18,<2", "build>=1,<2", "pip-audit>=2.9,<3"]
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+[tool.ruff]
+line-length = 100
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+[tool.mypy]
+python_version = "3.12"
+strict = true
+[tool.coverage.run]
+source = ["agent_workbench"]
